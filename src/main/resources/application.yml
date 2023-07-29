@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:hsqldb:file:/Users/andy/Desktop/db
+    username: sa
+    password: sa
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+task:
+  sign:
+    corn: 5 * 7 * * ?

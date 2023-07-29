@@ -1,0 +1,32 @@
+###
+POST http://localhost:8080/info
+Content-Type: application/json
+
+{
+  "name": "test",
+  "key": "testkey",
+  "pin": "testpin"
+
+}
+
+###
+PUT http://localhost:8080/info
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "test2",
+  "key": "testkey2",
+  "pin": "testpin2"
+}
+
+###
+GET http://localhost:8080/info
+
+###
+GET http://localhost:8080/info/3
+
+###
+DELETE http://127.0.0.1:8080/info/15
+
+

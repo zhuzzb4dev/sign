@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>签到配置-新增</title>
+    <link rel="stylesheet" href="https://unpkg.com/layui@2.6.8/dist/css/layui.css">
+</head>
+<body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<div class="layui-form" id="view">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input" v-model="info.name">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">pt_pin</label>
+        <div class="layui-input-block">
+            <input type="text" name="ptPin" required  lay-verify="required" placeholder="请输入pt_pin" autocomplete="off" class="layui-input" v-model="info.pin">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">pt_key</label>
+        <div class="layui-input-block">
+            <textarea name="ptKet" placeholder="请输入pt_key" lay-verify="required" class="layui-textarea" v-model="info.key"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" @click="updateData">立即提交</button>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/layui@2.6.8/dist/layui.js"></script>
+<script>
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+            return {
+                info:{
+                    key: 'test-key',
+                    pin: 'test-pin',
+                    name: 'test',
+                },
+
+            }
+        },
+        created() {
+        },
+        methods: {
+            async fetchData() {
+            },
+            updateData() {
+                let parentAPP = parent.app
+
+                var info = {
+                    key: this.info.key,
+                    pin: this.info.pin,
+                    name: this.info.name,
+                };
+                fetch('http://127.0.0.1:8080/info', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(info),
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log('Success:', result);
+                        console.log(parent.Vue)
+                        let index = parent.layer.getFrameIndex(window.name)
+                        parent.layer.close(index, parentAPP.fetchData())
+
+                    })
+
+            }
+
+        }
+    }).mount('#view')
+
+
+    layui.use(['form'], function() {
+
+    });
+
+</script>
+</body>
+</html>
