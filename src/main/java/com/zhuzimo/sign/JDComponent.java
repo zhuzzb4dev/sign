@@ -30,16 +30,10 @@ public class JDComponent {
     @Value("${jd.signUrl:https://api.m.jd.com/client.action}")
     private String jdSignUrl;
 
-    @Value("${jd.ptKey:AAJkxJG-321}")
-    private String ptKey;
-
-    @Value("${jd.ptPin:123}")
-    private String ptPin;
-
     @Resource
     private PtEntityDao ptEntityDao;
 
-    @Scheduled(cron = "${task.sign.corn}")
+    @Scheduled(cron = "${task.sign.cron}")
     public void sign() {
         log.info("定时任务执行-开始");
         Iterable<PtEntity> all = ptEntityDao.findAll();

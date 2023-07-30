@@ -9,7 +9,7 @@
 <body>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <div class="layui-form" id="view">
-
+    <input type="hidden" name="id" required  lay-verify="required" v-model="info.id">
     <div class="layui-form-item">
         <label class="layui-form-label">名称</label>
         <div class="layui-input-block">
@@ -42,28 +42,27 @@
         data() {
             return {
                 info:{
-                    key: 'test-key',
-                    pin: 'test-pin',
-                    name: 'test',
+
                 },
 
             }
         },
         created() {
+            let id = layui.url().search.id;
+            if (id) {
+                this.fetchData(id);
+            }
         },
         methods: {
-            async fetchData() {
+            async fetchData(id) {
+                this.info = await (await fetch("/info/" + id)).json()
             },
             updateData() {
                 let parentAPP = parent.app
 
-                var info = {
-                    key: this.info.key,
-                    pin: this.info.pin,
-                    name: this.info.name,
-                };
+                var info = this.info;
                 fetch('/info', {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -75,7 +74,6 @@
                         console.log(parent.Vue)
                         let index = parent.layer.getFrameIndex(window.name)
                         parent.layer.close(index, parentAPP.fetchData())
-
                     })
 
             }

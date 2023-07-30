@@ -4,10 +4,14 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:hsqldb:file:/Users/andy/Desktop/db
+    url: jdbc:hsqldb:file:hsqldb
     username: sa
     password: sa
     driver-class-name: org.hsqldb.jdbc.JDBCDriver
+  application:
+    name: sign
 task:
   sign:
-    corn: 5 * 7 * * ?
+    cron: 5 30 12 * * ?
+server:
+  port: 7000

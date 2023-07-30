@@ -30,3 +30,35 @@ GET http://localhost:8080/info/3
 DELETE http://127.0.0.1:8080/info/15
 
 
+
+###
+POST http://192.168.1.239:7000/info
+Content-Type: application/json
+
+{
+  "name": "cy",
+  "key": "AAJkxQEqADDVwCNKlFoBohzimglTnG5sUm6cUufWNODzGKLmnDhpo2FZgG_lKU5ftpL-phwLK88",
+  "pin": "zixuehan12_m"
+
+}
+
+###
+PUT http://localhost:8080/info
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "test2",
+  "key": "testkey2",
+  "pin": "testpin2"
+}
+
+###
+GET http://192.168.1.239:7000/info
+
+###
+GET http://192.168.1.239:7000/info/3
+
+###
+DELETE http://127.0.0.1:8080/info/15
+
